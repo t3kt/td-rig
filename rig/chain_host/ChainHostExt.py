@@ -46,10 +46,7 @@ class ChainHost:
 
 	@staticmethod
 	def _GetChainToxFile(dirFilesDat: 'DAT', chainName: str):
-		if chainName:
-			tox = chainName + '.tox'
-			if dirFilesDat[tox, 0] is not None:
-				return tox
-		for i in range(1, dirFilesDat.numRows):
-			if dirFilesDat[i, 'extension'] == 'tox':
-				return dirFilesDat[i, 'name'].val
+		if not chainName:
+			return None
+		tox = chainName + '.tox'
+		return tox if dirFilesDat[tox, 0] is not None else None
