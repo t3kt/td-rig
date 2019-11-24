@@ -1,10 +1,12 @@
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Callable
 
 # noinspection PyUnreachableCode
 if False:
 	# noinspection PyUnresolvedReferences
 	from _stubs import *
+	from _stubs.PopDialogExt import PopDialogExt
 
 class Editor:
 	def __init__(self, ownerComp: 'COMP'):
@@ -59,17 +61,29 @@ class Editor:
 				ui.messageBox('Unable to save chain!', 'Chain directory already exists: {!r}!'.format(folder))
 				return
 			folder.mkdir(parents=True)
-			toxFile = tdu.collapsePath((folder / (newName + '.tox')).as_posix())
-			thumbFile = tdu.collapsePath((folder / 'thumb.png').as_posix())
+			toxFile = (folder / (newName + '.tox')).as_posix()
+			thumbFile = (folder / 'thumb.png').as_posix()
 			attrs.par.Name.val = newName
 			attrs.par.Folder.val = tdu.collapsePath(folder.as_posix())
-			attrs.par.Tox.val = toxFile
-			attrs.par.Thumb.val = thumbFile
+			attrs.par.Tox.val = tdu.collapsePath(toxFile)
+			attrs.par.Thumb.val = tdu.collapsePath(thumbFile)
 		else:
-			toxFile = attrs.par.Tox.eval()
-			thumbFile = attrs.par.Thumb.eval()
+			toxFile = tdu.expandPath(attrs.par.Tox.eval())
+			thumbFile = tdu.expandPath(attrs.par.Thumb.eval())
+		print('saving chain to tox {!r}'.format(toxFile))
 		chain.save(toxFile)
+		print('saving thumbnail to {!r}'.format(thumbFile))
 		self.ownerComp.op('new_thumb').save(thumbFile)
+
+	def SaveChainAs(self):
+		_ShowPromptDialog(
+			'Save chain as',
+			'New chain name',
+			self._ChainAttrs.par.Name.eval(),
+			textentry=True,
+			oktext='Save',
+			ok=lambda newName: self.SaveChain(newName),
+		)
 
 @dataclass
 class _ChainInfo:
@@ -91,3 +105,31 @@ class _ChainInfo:
 			thumbtop=dat[row, 'thumbtop'].val,
 		)
 
+
+def _ShowPromptDialog(
+		title=None,
+		text=None,
+		default='',
+		textentry=True,
+		oktext='OK',
+		canceltext='Cancel',
+		ok: Callable = None,
+		cancel: Callable = None):
+	def _callback(info):
+		if info['buttonNum'] == 1:
+			if ok:
+				if not text:
+					ok()
+				else:
+					ok(info.get('enteredText'))
+		elif info['buttonNum'] == 2:
+			if cancel:
+				cancel()
+	dialog = op.TDResources.op('popDialog')  # type: PopDialogExt
+	dialog.Open(
+		title=title,
+		text=text,
+		textEntry=False if not textentry else (default or ''),
+		buttons=[oktext, canceltext],
+		enterButton=1, escButton=2, escOnClickAway=True,
+		callback=_callback)
