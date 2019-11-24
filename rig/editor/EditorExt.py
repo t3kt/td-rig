@@ -99,6 +99,12 @@ class Editor:
 			pane = ui.panes.createFloating(type=PaneType.NETWORKEDITOR, name='chaineditor')
 		pane.owner = chain
 
+	def ShowCustomizeComp(self):
+		chain = self._Chain
+		if not chain:
+			return
+		ui.openCOMPEditor(chain)
+
 def _GetActiveEditor():
 	pane = ui.panes.current
 	if pane.type == PaneType.NETWORKEDITOR:
