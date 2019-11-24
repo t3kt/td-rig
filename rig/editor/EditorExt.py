@@ -74,6 +74,7 @@ class Editor:
 		chain.save(toxFile)
 		print('saving thumbnail to {!r}'.format(thumbFile))
 		self.ownerComp.op('new_thumb').save(thumbFile)
+		self.ownerComp.op('chain_manager').par.Refreshpulse.pulse()
 
 	def SaveChainAs(self):
 		_ShowPromptDialog(
@@ -84,6 +85,32 @@ class Editor:
 			oktext='Save',
 			ok=lambda newName: self.SaveChain(newName),
 		)
+
+	def ShowInEditor(self, useActive=False):
+		chain = self._Chain
+		if not chain:
+			return
+		pane = None
+		if useActive:
+			pane = _GetActiveEditor()
+		if not pane:
+			pane = _GetPaneByName('chaineditor')
+		if not pane:
+			pane = ui.panes.createFloating(type=PaneType.NETWORKEDITOR, name='chaineditor')
+		pane.owner = chain
+
+def _GetActiveEditor():
+	pane = ui.panes.current
+	if pane.type == PaneType.NETWORKEDITOR:
+		return pane
+	for pane in ui.panes:
+		if pane.type == PaneType.NETWORKEDITOR:
+			return pane
+
+def _GetPaneByName(name):
+	for pane in ui.panes:
+		if pane.name == name:
+			return pane
 
 @dataclass
 class _ChainInfo:
