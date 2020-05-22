@@ -125,7 +125,6 @@ class _ChainInfo:
 	modified: str = None
 	tox: str = None
 	thumb: str = None
-	thumbtop: str = None
 
 	@classmethod
 	def FromRow(cls, dat, row):
@@ -135,7 +134,6 @@ class _ChainInfo:
 			modified=dat[row, 'modified'].val,
 			tox=dat[row, 'tox'].val,
 			thumb=dat[row, 'thumb'].val,
-			thumbtop=dat[row, 'thumbtop'].val,
 		)
 
 
