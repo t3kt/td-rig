@@ -1,0 +1,40 @@
+{
+  "recorder": {
+    "Folder": "",
+    "Basename": "",
+    "Addresolutionsuffix": true,
+    "Addvcodecsuffix": true,
+    "Addacodecsuffix": true,
+    "Addfpssuffix": true,
+    "Useinputres": true,
+    "Inputresmult": "original",
+    "Resolution1": 1,
+    "Resolution2": 1,
+    "Videocodec": "hap",
+    "Audiocodec": "alac",
+    "Imagefiletype": "tiff",
+    "Audiobitrate": "b128",
+    "Quality": 1.35,
+    "Fps": 30,
+    "Audioenabled": false,
+    "Videotype": "movie",
+    "Moviepixelformat": "rgb",
+    "Bitratemode": "variable",
+    "Entropymode": "autoselect",
+    "Hapsecondarycompression": true,
+    "Profile": "autoselect",
+    "Avgbitrate": 8000,
+    "Peakbitrate": 10000,
+    "Keyframeinterval": 15
+  },
+  "previewPanel": {
+    "Showaudiopreview": false,
+    "Showvideopreview": true,
+    "Showvideoinfo": false
+  },
+  "workspace": {
+    "Name": "Rig Chains",
+    "Subcomptags": "tmod vjzmod4",
+    "Folderlayout": "subdirs"
+  }
+}
