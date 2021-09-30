@@ -1,23 +1,36 @@
 {
+  "workspace": {
+    "Name": "rig",
+    "Exposesubcomps": true,
+    "Subcomptags": "tmod vjzmod4",
+    "Folderlayout": "subdirs"
+  },
   "recorder": {
-    "Folder": "",
-    "Basename": "",
+    "Folder": "S:/output/rig",
+    "Basename": {
+      "$": "ipar.workspace.Name"
+    },
+    "Includedate": true,
+    "Datetype": "today",
+    "Customdate": "",
+    "Suffix": {
+      "$": "ipar.editorState.Name"
+    },
     "Addresolutionsuffix": true,
     "Addvcodecsuffix": true,
     "Addacodecsuffix": true,
     "Addfpssuffix": true,
-    "Useinputres": true,
-    "Inputresmult": "original",
-    "Resolution1": 1,
-    "Resolution2": 1,
+    "Outputresolution": "useinput",
+    "Resolution1": 3840,
+    "Resolution2": 2160,
     "Videocodec": "hap",
+    "Videotype": "movie",
     "Audiocodec": "alac",
     "Imagefiletype": "tiff",
     "Audiobitrate": "b128",
     "Quality": 1.35,
     "Fps": 30,
     "Audioenabled": false,
-    "Videotype": "movie",
     "Moviepixelformat": "rgb",
     "Bitratemode": "variable",
     "Entropymode": "autoselect",
@@ -27,15 +40,26 @@
     "Peakbitrate": 10000,
     "Keyframeinterval": 15
   },
-  "previewPanel": {
-    "Showaudiopreview": false,
-    "Showvideopreview": true,
-    "Showvideoinfo": false
+  "libraryLoader": {
+    "Libraries": {
+      "$": "None"
+    }
   },
-  "workspace": {
-    "Name": "Rig Chains",
-    "Exposesubcomps": true,
-    "Subcomptags": "tmod vjzmod4",
-    "Folderlayout": "subdirs"
+  "editorUIState": {
+    "Selectedview": "preview_panel",
+    "Selectedleftpanel": "component_picker",
+    "Selectedrightpanel": "none",
+    "Previewshowaudio": false,
+    "Previewshowvideo": true,
+    "Previewshowvideoinfo": false
+  },
+  "editorViews": {
+    "Customviews": [
+      {
+        "name": "testCustom",
+        "label": "Test Custom View",
+        "copyOf": {"$":  "parent.editorRoot.op('TEST_customView')"}
+      }
+    ]
   }
 }
